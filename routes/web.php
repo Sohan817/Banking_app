@@ -19,3 +19,9 @@ Route::get('/', function () {
 });
 Route::get("signup", [UserController::class, 'signup_view'])->name('signup');
 Route::post("signup", [UserController::class, 'signup'])->name('signup');
+Route::get("login", [UserController::class, 'login_view'])->name('login');
+Route::post('login', [UserController::class, 'login'])->name('login');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('home', [UserController::class, 'home'])->name('home');
+    Route::get('logout', [UserController::class, 'logout'])->name('logout');
+});
